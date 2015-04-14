@@ -1,0 +1,39 @@
+{
+  "name": "es6React",
+  "version": "1.0.0",
+  "description": "Workshop for ES6 React",
+  "main": "server/app.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:btholt/es6-react-pres"
+  },
+  "keywords": [
+    "es6",
+    "react",
+    "workshop",
+    "fluent",
+    "oscon"
+  ],
+  "author": "Brian Holt <btholt@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btholt/es6-react-pres/issues"
+  },
+  "homepage": "https://github.com/btholt/es6-react-pres",
+  "dependencies": {
+    "font-awesome": "^4.3.0",
+    "lodash": "^3.6.0",
+    "omdb-client": "^1.0.6",
+    "react": "^0.13.1"
+  },
+  "devDependencies": {
+    "babelify": "^6.0.2",
+    "browserify": "^9.0.8",
+    "gulp": "^3.8.11",
+    "gulp-rename": "^1.2.2",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

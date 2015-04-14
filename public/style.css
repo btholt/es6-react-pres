@@ -1,0 +1,150 @@
+body {
+  background-color: #B9090B;
+  color: #000;
+  font-family: Helvetica, sans-serif;
+  margin: 0;
+}
+
+.movies-list {
+  background-color: rgba(245,245,245,.9);
+  width: 960px;
+  margin: 0 auto;
+  padding: 5px;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.movie-tile {
+  width: 32%;
+  margin-right: 2%;
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+
+.movie-tile:nth-child(3n) {
+  margin-right: 0;
+  clear: right;
+}
+
+.movie-tile__img-container {
+  width: 50%;
+  float: left;
+}
+
+.movie-tile__img, .movie-row__img {
+  width: 100%;
+  height: 0;
+  padding-bottom: 150%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;;
+}
+
+.movie-tile__info {
+  text-align: center;
+  margin-left: 5%;
+  width: 45%;
+  float: left;
+}
+
+.movie-tile__title {
+  font-size: 1.5em;
+  font-weight: normal;
+}
+
+.movie-tile__year {
+  font-size: .8em;
+  font-weight: normal;
+  color:gray;
+}
+
+.movie-tile__stars {
+  font-size: .9em;
+  position: absolute;
+  bottom: 25px;
+}
+
+.app-header {
+  background-color: #000;
+  color: #B9090B ;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.app-header__inner {
+  width: 960px;
+  margin: 0 auto;
+}
+
+.app-header__title {
+  float:left;
+  margin: 5px;
+}
+
+.app-header__display-select {
+  float: right;
+  margin: 5px;
+  width: 100px;
+  -webkit-appearance: none;
+  padding: 8px 10px;
+  border: 2px solid lightgray;
+}
+
+.app-header__display-select:focus, 
+.app-header__search:focus {
+  outline: none;
+  border-color: #7FDBFF;
+}
+
+.app-header__search {
+  float: right;
+  margin: 5px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 2px solid lightgray;
+  -webkit-highlight: none;
+}
+
+.movie-row {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.movie-row__img-container {
+  width: 100px;
+}
+
+.movie-row__title {
+  font-size: 1.4em;
+}
+
+.movie-row__year {
+  font-size: 1em;
+  color: gray;
+}
+
+.movie-row__info {
+  /*text-align: center;*/
+  padding-left: 15px;
+  width: 30%;
+}
+
+.movie-row__desc {
+  width: 40%;
+}
+
+.movie-row .rating-stars {
+  flex-grow: 3;
+  text-align: right;
+}
+
+.app-header__term {
+  float: right;
+  margin: 12px;
+}
+
+.app-header__term a {
+  color: #fff;
+}

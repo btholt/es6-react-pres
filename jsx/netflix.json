@@ -1,0 +1,64 @@
+{
+  "Search": [
+    {
+      "Title": "House of Cards",
+      "Year": "2013–",
+      "imdbID": "tt1856010",
+      "Type": "series"
+    },
+    {
+      "Title": "Daredevil",
+      "Year": "2015–",
+      "imdbID": "tt3322312",
+      "Type": "series"
+    },
+    {
+      "Title": "Orange is the New Black",
+      "Year": "2013–",
+      "imdbID": "tt2372162",
+      "Type": "series"
+    },
+    {
+      "Title": "Arrested Development",
+      "Year": "2003–",
+      "imdbID": "tt0367279",
+      "Type": "series"
+    },
+    {
+      "Title": "Unbreakable Kimmy Schmidt",
+      "Year": "2015–",
+      "imdbID": "tt3339966",
+      "Type": "series"
+    },
+    {
+      "Title": "Marco Polo",
+      "Year": "2014–",
+      "imdbID": "tt2189461",
+      "Type": "series"
+    },
+    {
+      "Title": "Bloodline",
+      "Year": "2015–",
+      "imdbID": "tt3520702",
+      "Type": "series"
+    },
+    {
+      "Title": "BoJack Horseman",
+      "Year": "2014–",
+      "imdbID": "tt3398228",
+      "Type": "series"
+    },
+    {
+      "Title": "Hemlock Grove",
+      "Year": "2013–",
+      "imdbID": "tt2309295",
+      "Type": "series"
+    },
+    {
+      "Title": "The Killing",
+      "Year": "2011–2014",
+      "imdbID": "tt1637727",
+      "Type": "series"
+    }
+  ]
+}
