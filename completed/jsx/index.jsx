@@ -1,6 +1,6 @@
 var React = require('react');
-// var omdb = require('omdb-client');
-var omdb = require('./fake-omdb-client');
+var omdb = require('omdb-client');
+// var omdb = require('./fake-omdb-client');
 var MovieContainer = require('./MovieContainer');
 var MovieTileLayout = require('./MovieTileLayout');
 var MovieListLayout = require('./MovieListLayout');
@@ -69,4 +69,4 @@ class App extends React.Component {
 
 }
 
-React.render(<App />, window.document.querySelector("#target"));
+module.exports = App;

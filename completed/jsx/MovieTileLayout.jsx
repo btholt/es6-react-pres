@@ -3,15 +3,12 @@ var RatingStars = require('./RatingStars');
 
 class MovieTileLayout extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
+    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : `public/img/fake${Math.floor(Math.random()*5) + 1}.jpg`
     return (
       <div className="movie-tile">
         <div className="movie-tile__img-container">
-          <div className="movie-tile__img" style={{'backgroundImage': `url(public/img/${this.props.Poster})`}} />
+          <div className="movie-tile__img" style={{'backgroundImage': `url(${img})`}} />
         </div>
         <div className="movie-tile__info">
           <h1 className="movie-tile__title">{this.props.Title}</h1>

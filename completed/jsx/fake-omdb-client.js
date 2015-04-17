@@ -5,9 +5,7 @@ var _ = require('lodash');
 
 var omdb = {
   search: (params, cb) => {
-    var thing = {Search:_.shuffle(search.Search)};
-    console.log('thing', thing);
-    cb(null, thing);
+    cb(null, {Search:_.shuffle(search.Search)});
   },
   get: (params, cb) => {
     cb(null, get.movies[Math.floor(Math.random()*get.movies.length)]);

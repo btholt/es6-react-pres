@@ -26,8 +26,6 @@ class Header extends React.Component {
   }
 
   handleClearEvent(e) {
-    e.preventDefault();
-
     this.props.clearTerm();
   }
 

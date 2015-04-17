@@ -1,8 +1,6 @@
 var React = require('react');
-// var omdb = require('omdb-client');
-var omdb = require('./fake-omdb-client');
-
-window.omdb = omdb;
+var omdb = require('omdb-client');
+// var omdb = require('./fake-omdb-client');
 
 class MovieContainer extends React.Component {
 

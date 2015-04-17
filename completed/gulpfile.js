@@ -5,16 +5,12 @@ var source = require('vinyl-source-stream');
  
 // Basic usage 
 gulp.task('scripts', function() {
-  // Single entry point to browserify 
- var entryFile = './jsx/index.jsx';
+ var entryFile = './jsx/clientApp.jsx';
 
   var bundler = browserify({
     extensions: ['.js', '.es6.js', '.jsx'],
     transform: ['babelify']
   });
-
-  // bundler
-  //   .transform(babelify());
 
   bundler.add(entryFile);
 
@@ -28,5 +24,5 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch('./jsx/**/*.jsx', ['scripts']);
+  gulp.watch(['./jsx/**/*'], ['scripts']);
 });

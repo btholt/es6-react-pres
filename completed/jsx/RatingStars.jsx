@@ -2,10 +2,6 @@ var React = require('react');
 
 class RatingStars extends React.Component {
 
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     var filled = Math.floor(this.props.score);
     var hasHalf = this.props.score - filled > .5;
