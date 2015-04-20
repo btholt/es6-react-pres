@@ -32,6 +32,11 @@ The completed project lives in the [completed/](https://github.com/btholt/es6-re
 
 Also, something tricky is that for the first bit, you'll need to symlink in font-awesome. `ln -s node_modules/font-awesome/ empty/fa` should work (after you've ran `npm install`.)
 
+### How to Run
+1. cd into completed or empty directory
+2. `iojs app.js`
+3. Navigate to `localhost:3000` in web browser
+
 ## Contributing
 
 Please feel free to correct spelling errors, leave issues of how certain things are unclear (whether that's listening to me actually present this or just from reading,) or make PRs if you find a better way to teach or say something.
