@@ -30,10 +30,15 @@
     "react": "^0.13.1"
   },
   "devDependencies": {
+    "babel": "^5.1.11",
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",
     "gulp": "^3.8.11",
     "gulp-rename": "^1.2.2",
+    "koa": "^0.19.1",
+    "koa-mount": "^1.3.0",
+    "koa-route": "^2.4.1",
+    "koa-static": "^1.4.9",
     "vinyl-source-stream": "^1.1.0"
   }
 }
