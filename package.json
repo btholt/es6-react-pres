@@ -30,6 +30,7 @@
     "react": "^0.13.1"
   },
   "devDependencies": {
+    "aliasify": "^1.7.2",
     "babel": "^5.1.11",
     "babelify": "^6.0.2",
     "browserify": "^9.0.8",
