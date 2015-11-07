@@ -1,0 +1,49 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica Neue, Helvetica, sans-serif;
+}
+
+a {
+  color: gray;
+}
+
+h1,h2,h3 {
+  color: gray;
+  width: 100%;
+  text-align: center;
+}
+
+.main-body {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 40px;
+  color: gray;
+}
+
+.links-list {
+  list-style: disc inside none;
+}
+
+.links {
+  display: flex;
+  width: 48.5%;
+  height: 185px;
+  border: 1px solid gray;
+  margin-right: 2.5%;
+  margin-bottom: 2.5%;
+  float: left;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.links:nth-child(2n) {
+  margin-right: 0;
+}
