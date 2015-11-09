@@ -17,17 +17,13 @@ h1,h2,h3 {
 }
 
 .main-body {
-  max-width: 800px;
+  width: 800px;
   margin: 0 auto;
 }
 
 .title {
   font-size: 40px;
   color: gray;
-}
-
-.links-list {
-  list-style: disc inside none;
 }
 
 .links {
