@@ -8,7 +8,7 @@ Let's look around first. Some of these files are already filled out for you beca
 
 I could spend a whole workshop just talking about builds in JavaScript. Luckily for you, that is not the subject of this workshop. Here we just have a basic build using Browserify and Gulp to package up the app we are about to write all nice and tightly. To be able to be modular, you are either going to have to use either Browserfiy or Webpack; either works well. I just went with Browserify because I have more experience with it.
 
-### index.html & public/style.css
+### index.html & statics/style.css
 
 Nothing noteworthy here. We'll be building a index.js using Browserify to stick in `public/` which will be loaded in. Also, here we'll have to do a bit of funny business to font-awesome to work. In *nix environments, it's enough to just to symlink `<project>/node_modules/font-awesome` to `<project>/empty/fa`. If you want to even just copy it there, that works too. So long as font-awesome's whole directory lives at `<project>/empty/fa`.
 
@@ -65,12 +65,14 @@ About as basic as you can get with React here. We're just creating a basic compo
 ### jsx/clientApp.jsx
 
 ```javascript
+var ReactDOM = require('react-dom');
 var React = require('react');
 var App = require('./index');
-React.render(<App />, window.document.querySelector("#target"));
+ReactDOM.render(<App />, window.document.querySelector("#target"));
 ```
 
 - That's it. This file won't change for the rest of the project. So why this file? Why not just do that in the `index.jsx` file? If we weren't doing server-side rendering, it would not be a big deal. However, since we will, we need to be able to separate the construction of the markup and the actual code targeting the DOM. If you're doing server-side rendering, you can't use the `window` or `document` objects anywhere, or at least not without a lot of struggle to do so.
+- We do have to require React. Babel will translate the JSX to React calls, so it is in fact still necessary.
 - No, you don't need `window` in `window.document`. Force of habit.
 - Okay, let's try. Should do something.
 
@@ -178,7 +180,7 @@ var React = require('react');
 class MovieTileLayout extends React.Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : `public/img/fake${Math.floor(Math.random()*5) + 1}.jpg`
+    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
     return (
       <div className="movie-tile">
         <div className="movie-tile__img-container">
@@ -203,7 +205,7 @@ module.exports = MovieTileLayout;
 
 - Okay, so now we're going to get serious about making our movies look nice. This is the layout we'll be using for the movies. Why are we not putting this markup in `MovieContainer`? You'll see soon but the short answer is that we're separating behavior from presentation which allows you to swap presentation and maintain the same logic.
 - Notice we have no constructor. If you're not doing anything with state then you don't have to have it.
-- ES6 template strings! So rad. Love them. These are already present in other languages but essentially it allows you to avoid the awful syntax of concatenating strings together. The format is having back-ticks instead of single or double quotes. Inside of these template strings, you can use ${} to denote where you want to put any sort of JavaScript expression. In ours, as you can see, we're putting a random number between 1 and 5.
+- Throwing up a placeholder if the image isn't available for whatever reason.
 
 ### jsx/index.jsx
 
@@ -251,24 +253,28 @@ class RatingStars extends React.Component {
     var filled = Math.floor(this.props.score);
     var hasHalf = this.props.score - filled > .5;
     var empty = this.props.max - filled;
+    var count = 0;
 
     var stars = [];
 
     for (var i = 0; i < filled; i++) {
       stars.push(
-        <i className="fa fa-star" />
+        <i key={count} className="fa fa-star" />
       );
+      count++;
     }
     if (hasHalf) {
       empty--;
       stars.push(
-        <i className="fa fa-star-half-o" />
+        <i key={count} className="fa fa-star-half-o" />
       );
+      count++;
     }
     for (var i = 0; i < empty; i++) {
       stars.push(
-        <i className="fa fa-star-o" />
+        <i key={count} className="fa fa-star-o" />
       );
+      count++;
     }
     return (
       <div className="rating-stars">
@@ -284,6 +290,7 @@ module.exports = RatingStars;
 
 - Should be straight forward here. We're creating a bunch of star icons (courtesy of Font Awesome,) sticking it in an array, and then rendering the array.
 - Perhaps the only novel thing here is the arrow function that has no return statement. Pretty neat little feature here. Because we only have one statement, the return is implicit on the function. So what's really happening, using the old syntax is `function(el) { return el; }`. Cool.
+- We're also keeping track of which star we're on so we can give the component a key. This is so React can keep track of which star is which. If you update the rating, it knows to reuse that same icon and just change the class now. It'll give a warning if you take them off.
 - Let's go implement it in `MovieTileLayout`.
 
 ### jsx/MovieTileLayout.jsx
@@ -409,7 +416,7 @@ var RatingStars = require('./RatingStars');
 class MovieListLayout extends React.Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : `public/img/fake${Math.floor(Math.random()*5) + 1}.jpg`
+    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
     return (
       <div className="movie-row">
         <div className="movie-row__img-container">
@@ -636,6 +643,7 @@ var route = require('koa-route');
 var serve = require('koa-static');
 var mount = require('koa-mount');
 var React = require('react');
+var ReactDOMServer = require('react-dom/server');
 var _ = require('lodash');
 var fs = require('fs');
 
@@ -648,11 +656,12 @@ app.use(mount('/fa', serve('../node_modules/font-awesome')));
 app.use(mount('/public', serve('./public')));
 
 app.use(route.get('/', function *() {
-  var rendered = React.renderToString(React.createElement(ClientApp));
+  var rendered = ReactDOMServer.renderToString(React.createElement(ClientApp));
   this.body = _.template(baseTemplate)({body:rendered});
 }));
 
 app.listen(3000);
+
 ```
 
 - Kinda going all-in at once, since it doesn't really work without all the parts and this isn't a server-side JS workshop so I'm not going to explain the ins and outs of it.
@@ -660,7 +669,7 @@ app.listen(3000);
 - We're using koa but this code would nearly work as is with Express. For those who don't know koa, it's written by the same guy who did Express, TJ Holowaychuck, and functions very similarly, only it uses ES6 generators instead of callbacks for its middleware. It's super cool and really simple to use.
 - We read in a basic lodash template (`basicTemplate.html`) and use that with lodash to stick the markup we're about to render there. There are a few ways to go about doing this but I've found this to be the simplest.
 - We're also taking advantage of koa's static and mount modules to get our font-awesome and CSS/JS files mounted in the correct places. Static just serves every file in that directory with the proper headers (kinda like how PHP servers can do it) and mount just mounts whatever middleware's action that follows it to that URL. Pretty cool.
-- Inside the get method we use React's `renderToString` method to get React to spit out its first render. Notice that the componentDidMount method will not run yet because it actually hasn't mounted on the DOM yet. So we won't see the movies yet as those APIs will be made on the client. If you want those to show, you need to get a bit more fancy about it but we're not going to do so here.
+- Inside the get method we use ReactDOMServer's `renderToString` method to get React to spit out its first render. Notice that the componentDidMount method will not run yet because it actually hasn't mounted on the DOM yet. So we won't see the movies yet as those APIs will be made on the client. If you want those to show, you need to get a bit more fancy about it but we're not going to do so here.
 - You can take this a lot of places. Our page is pretty ugly because we don't have a lot of good data without calling out to the API so you can give it better place holders or spinners to let people know it's loading. You can also take this markup (because right now the initial markup won't change unless we change it ourselves) and stick it in the cache and always serve that instead of making React doing it on every request. All beyond the scope of the class but things you should be thinking about for your apps.
 - So let's give it a shot. Run `node app.js` from the CLI to see if it starts up. It should be listening on port 3000. Notice the header is there and you'll likely also see the other posters this time before it renders (they were there before too, they just usually get rendered out before you saw them.)
 - Also note that React may yell at you for the random numbers generated for the placeholder images. You probably shouldn't use random numbers; you should use some sort of action that will reliably give you the same sequence of answers every time.

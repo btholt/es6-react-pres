@@ -4,7 +4,7 @@ var RatingStars = require('./RatingStars');
 class MovieListLayout extends React.Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : `public/img/fake${Math.floor(Math.random()*5) + 1}.jpg`
+    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
     return (
       <div className="movie-row">
         <div className="movie-row__img-container">

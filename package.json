@@ -27,13 +27,17 @@
     "font-awesome": "^4.3.0",
     "lodash": "^3.6.0",
     "omdb-client": "^1.0.6",
-    "react": "^0.13.1"
+    "react": "^0.14.2",
+    "react-dom": "^0.14.2"
   },
   "devDependencies": {
     "aliasify": "^1.7.2",
-    "babel": "^5.1.11",
-    "babelify": "^6.0.2",
-    "browserify": "^9.0.8",
+    "babel-core": "^6.1.2",
+    "babel-polyfill": "^6.0.16",
+    "babel-preset-es2015": "^6.1.2",
+    "babel-preset-react": "^6.1.2",
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
     "gulp": "^3.8.11",
     "gulp-rename": "^1.2.2",
     "koa": "^0.19.1",

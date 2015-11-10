@@ -6,24 +6,28 @@ class RatingStars extends React.Component {
     var filled = Math.floor(this.props.score);
     var hasHalf = this.props.score - filled > .5;
     var empty = this.props.max - filled;
+    var count = 0;
 
     var stars = [];
 
     for (var i = 0; i < filled; i++) {
       stars.push(
-        <i className="fa fa-star" />
+        <i key={count} className="fa fa-star" />
       );
+      count++;
     }
     if (hasHalf) {
       empty--;
       stars.push(
-        <i className="fa fa-star-half-o" />
+        <i key={count} className="fa fa-star-half-o" />
       );
+      count++;
     }
     for (var i = 0; i < empty; i++) {
       stars.push(
-        <i className="fa fa-star-o" />
+        <i key={count} className="fa fa-star-o" />
       );
+      count++;
     }
     return (
       <div className="rating-stars">

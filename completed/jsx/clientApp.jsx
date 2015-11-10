@@ -1,3 +1,4 @@
+var ReactDOM = require('react-dom');
 var React = require('react');
 var App = require('./index');
-React.render(<App />, window.document.querySelector("#target"));
+ReactDOM.render(<App />, window.document.querySelector("#target"));
