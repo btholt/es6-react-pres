@@ -636,7 +636,7 @@ Now we're going to get in to using iojs (or node) to do some server-side pre-ren
 ### app.js (not in jsx/)
 
 ```javascript
-require("babel/register");
+require("babel-core/register");
 
 var koa = require('koa');
 var route = require('koa-route');

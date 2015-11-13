@@ -1,3 +1,4 @@
 node_modules/
 completed/public/index.js
 empty/public/index.js
+.DS_Store

@@ -11,9 +11,7 @@ gulp.task('scripts', function() {
 
   var bundler = browserify(entryFile, {extensions: [ ".js", ".jsx" ]});
 
-  bundler.transform(babelify.configure({
-    presets: ["es2015", "react"]
-  }));
+  bundler.transform(babelify);
 
   // bundler.add(entryFile);
 

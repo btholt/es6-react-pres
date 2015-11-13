@@ -1,4 +1,4 @@
-require("babel/register");
+require("babel-core/register");
 
 var koa = require('koa');
 var route = require('koa-route');
