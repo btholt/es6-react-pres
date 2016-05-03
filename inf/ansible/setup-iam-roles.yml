@@ -1,0 +1,6 @@
+---
+
+- hosts: all
+
+  roles:
+    - iam-roles
