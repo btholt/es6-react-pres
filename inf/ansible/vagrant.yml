@@ -1,0 +1,15 @@
+---
+- hosts: all
+  sudo: true
+  connection: local
+  gather_facts: yes
+
+  vars:
+    nodejs_version: "5.x" # upgraded via n later
+    nodejs_forever: false
+    nodejs_npm_global_packages: []
+
+  roles:
+  - { role: base }
+  - { role: geerlingguy.nodejs }
+  - { role: npm }

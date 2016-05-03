@@ -1,0 +1,34 @@
+---
+
+    - name: Update apt cache
+      apt: update-cache=yes cache_valid_time=86400
+      sudo: yes
+
+    - name: install basic packages
+      sudo: yes
+      apt: pkg={{ item }} state=latest
+      tags: [packages]
+      with_items:
+        - curl
+        - vim
+        - libxslt1-dev
+        - libxml2-dev
+        - unzip
+        - zip
+        - python-pip
+        - python-psycopg2
+        - git
+        - ntp
+        - wget
+
+    - name: Check NTP service to make sure its running
+      service: name=ntp state=started enabled=yes
+      sudo: yes
+
+    - name: Install AWS CLI package via Pip
+      pip: name=awscli
+      sudo: yes
+
+    - name: Install Boto Python package via Pip
+      pip: name=boto
+      sudo: yes

@@ -1,0 +1,48 @@
+---
+    - name: clean npm cache
+      sudo: true
+      command: npm cache clean -f
+
+    - name: Install global npm packages
+      npm: name={{ item }} global=yes registry=http://registry.npmjs.org/
+      with_items:
+        - n
+        - aliasify
+        - babel-cli
+        - babel-core
+        - babel-eslint
+        - babel-loader
+        - babel-polyfill
+        - json-loader
+        - babel-preset-es2015
+        - babel-preset-react
+        - babelify
+        - browserify
+        - coveralls
+        - dependency-check
+        - doctoc
+        - eslint
+        - eslint-config-airbnb
+        - isparta
+        - rimraf
+        - tap-spec
+        - tape
+        - watch
+        - webpack
+        - express
+        - express-stormpath
+        - knex
+        - bookshelf
+        - react
+        - gulp
+        - gulp-rename
+        - mocha
+        - mocha-bamboo-reporter
+        - chai
+
+    - name: upgrade node to stable
+      sudo: true
+      command: n stable
+
+    - name: Install app dependencies
+      npm: path="/vagrant" registry=http://registry.npmjs.org/ production=no
