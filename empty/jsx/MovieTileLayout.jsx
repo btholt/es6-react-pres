@@ -1,4 +1,5 @@
 import React from 'react';
+import RatingStars from './RatingStars';
 
 class MovieTileLayout extends React.Component {
   render () {
@@ -12,7 +13,10 @@ class MovieTileLayout extends React.Component {
           <h1 className='movie-tile__title'>{this.props.Title}</h1>
           <h2 className='movie-tile__year'>({this.props.Year})</h2>
           <div className='movie-tile__stars'>
-            STARS
+            <RatingStars
+              max={10}
+              score={this.props.imdbRating}
+            />
           </div>
         </div>
       </div>
