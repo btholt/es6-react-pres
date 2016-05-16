@@ -1,10 +1,10 @@
-var React = require('react');
-var RatingStars = require('./RatingStars');
+import React from 'react';
+import RatingStars from './RatingStars';
 
 class MovieTileLayout extends React.Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png'
+    const img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png'
     return (
       <div className="movie-tile">
         <div className="movie-tile__img-container">
@@ -27,4 +27,4 @@ class MovieTileLayout extends React.Component {
 
 }
 
-module.exports = MovieTileLayout;
+export default MovieTileLayout;

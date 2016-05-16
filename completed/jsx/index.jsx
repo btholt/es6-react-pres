@@ -1,12 +1,11 @@
-var React = require('react');
-var omdb = require('omdb-client');
-// var omdb = require('./fake-omdb-client');
-var MovieContainer = require('./MovieContainer');
-var MovieTileLayout = require('./MovieTileLayout');
-var MovieListLayout = require('./MovieListLayout');
-var preload = require('./netflix');
-var Header = require('./Header');
-var _ = require('lodash');
+import React from 'react';
+import omdb from 'omdb-client';
+import MovieContainer from './MovieContainer';
+import MovieTileLayout from './MovieTileLayout';
+import MovieListLayout from './MovieListLayout';
+import preload from './netflix';
+import Header from './Header';
+import { clone } from 'lodash';
 
 class App extends React.Component {
 
@@ -15,7 +14,7 @@ class App extends React.Component {
 
     this.state = {
       layout: 'list',
-      results: _.clone(preload.Search, true),
+      results: clone(preload.Search, true),
       term: ""
     };
   }
@@ -45,7 +44,7 @@ class App extends React.Component {
     }
     return (
       <div className="app-container">
-        <Header 
+        <Header
           changeLayout={this.changeLayout.bind(this)}
           layout={this.state.layout}
           term={this.state.term}
@@ -69,4 +68,4 @@ class App extends React.Component {
 
 }
 
-module.exports = App;
+export default App;

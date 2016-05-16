@@ -1,10 +1,10 @@
-var React = require('react');
-var RatingStars = require('./RatingStars');
+import React from 'react';
+import RatingStars from './RatingStars';
 
 class MovieListLayout extends React.Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
+    const img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
     return (
       <div className="movie-row">
         <div className="movie-row__img-container">
@@ -27,4 +27,4 @@ class MovieListLayout extends React.Component {
 
 }
 
-module.exports = MovieListLayout;
+export default MovieListLayout;

@@ -1,6 +1,5 @@
-var React = require('react');
-var omdb = require('omdb-client');
-// var omdb = require('./fake-omdb-client');
+import React from 'react';
+import omdb from 'omdb-client';
 
 class MovieContainer extends React.Component {
 
@@ -25,4 +24,4 @@ class MovieContainer extends React.Component {
   }
 }
 
-module.exports = MovieContainer
+export default MovieContainer;

@@ -1,14 +1,14 @@
-var React = require('react');
+import React from 'react';
 
 class RatingStars extends React.Component {
 
   render() {
-    var filled = Math.floor(this.props.score);
-    var hasHalf = this.props.score - filled > .5;
-    var empty = this.props.max - filled;
-    var count = 0;
+    const filled = Math.floor(this.props.score);
+    const hasHalf = this.props.score - filled > .5;
+    let empty = this.props.max - filled;
+    let count = 0;
 
-    var stars = [];
+    const stars = [];
 
     for (var i = 0; i < filled; i++) {
       stars.push(
@@ -38,4 +38,4 @@ class RatingStars extends React.Component {
 
 }
 
-module.exports = RatingStars;
+export default RatingStars;

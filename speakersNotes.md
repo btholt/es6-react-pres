@@ -43,7 +43,7 @@ At this point, feel free to throw on `gulp watch` in the `empty/` in the empty d
 ### jsx/index.jsx
 
 ```javascript
-var React = require('react');
+import React from 'react';
 
 class App extends React.Component {
   render() {
@@ -53,7 +53,7 @@ class App extends React.Component {
   }
 }
 
-module.exports = App;
+export default App;
 ```
 
 About as basic as you can get with React here. We're just creating a basic component and then exporting it for use. Couple of ES6 things worth noting here:
@@ -65,10 +65,10 @@ About as basic as you can get with React here. We're just creating a basic compo
 ### jsx/clientApp.jsx
 
 ```javascript
-var ReactDOM = require('react-dom');
-var React = require('react');
-var App = require('./index');
-ReactDOM.render(<App />, window.document.querySelector("#target"));
+import {render} from react-dom';
+import React from 'react';
+import App from './index';
+render(<App />, window.document.querySelector("#target"));
 ```
 
 - That's it. This file won't change for the rest of the project. So why this file? Why not just do that in the `index.jsx` file? If we weren't doing server-side rendering, it would not be a big deal. However, since we will, we need to be able to separate the construction of the markup and the actual code targeting the DOM. If you're doing server-side rendering, you can't use the `window` or `document` objects anywhere, or at least not without a lot of struggle to do so.
@@ -80,8 +80,8 @@ ReactDOM.render(<App />, window.document.querySelector("#target"));
 
 ```javascript
 // start at the top
-var preload = require('./netflix');
-var _ = require('lodash');
+import preload from './netflix';
+import {clone} from 'lodash';
 // end at the top
 
 // start in App class
@@ -89,7 +89,7 @@ constructor(props) {
   super(props)
 
   this.state = {
-    results: _.clone(preload.Search)
+    results: clone(preload.Search)
   };
 }
 // end in App class
@@ -121,11 +121,11 @@ render() {
 ### jsx/MovieContainer.jsx
 
 ```javascript
-var React = require('react');
+import React from 'react';
 var omdb = require('omdb-client');
 // var omdb = require('./fake-omdb-client');
 
-class MovieContainer extends React.Component {
+class MovieContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -146,7 +146,7 @@ class MovieContainer extends React.Component {
   }
 }
 
-module.exports = MovieContainer;
+export default MovieContainer;
 ```
 
 - Most of note here would be `componentDidMount` method. This method is a React lifecycle method that is called immediately after the component is run for the first time. Why do we make the AJAX call only after the component has rendered? Otherwise you're stuck waiting on AJAX calls that block your page from rendering. This gives you a faster perceived loading time. You can do things like throw up spinners to let people know that work is still being done behind the scenes.
@@ -156,7 +156,7 @@ module.exports = MovieContainer;
 
 ```javascript
 // start at top with other requires
-var MovieContainer = require('./MovieContainer');
+import MovieContainer from './MovieContainer';
 // end at top with other requires
 
 // start inside .map of render
@@ -175,9 +175,9 @@ return (
 ### jsx/MovieTileLayout.jsx
 
 ```javascript
-var React = require('react');
+import React from 'react';
 
-class MovieTileLayout extends React.Component {
+class MovieTileLayout extends Component {
 
   render() {
     var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
@@ -200,7 +200,7 @@ class MovieTileLayout extends React.Component {
 
 }
 
-module.exports = MovieTileLayout;
+export default MovieTileLayout;
 ```
 
 - Okay, so now we're going to get serious about making our movies look nice. This is the layout we'll be using for the movies. Why are we not putting this markup in `MovieContainer`? You'll see soon but the short answer is that we're separating behavior from presentation which allows you to swap presentation and maintain the same logic.
@@ -211,7 +211,7 @@ module.exports = MovieTileLayout;
 
 ```javascript
 // start with other require statements
-var MovieTileLayout = require('./MovieTileLayout');
+import MovieTileLayout from './MovieTileLayout';
 // end with other require statements
 
 // start inside the render function
@@ -245,19 +245,19 @@ render() {
 ### jsx/RatingStars.jsx
 
 ```javascript
-var React = require('react');
+import React from 'react';
 
-class RatingStars extends React.Component {
+class RatingStars extends Component {
 
   render() {
-    var filled = Math.floor(this.props.score);
-    var hasHalf = this.props.score - filled > .5;
-    var empty = this.props.max - filled;
-    var count = 0;
+    const filled = Math.floor(this.props.score);
+    const hasHalf = this.props.score - filled > .5;
+    let empty = this.props.max - filled;
+    let count = 0;
 
     var stars = [];
 
-    for (var i = 0; i < filled; i++) {
+    for (let i = 0; i < filled; i++) {
       stars.push(
         <i key={count} className="fa fa-star" />
       );
@@ -270,7 +270,7 @@ class RatingStars extends React.Component {
       );
       count++;
     }
-    for (var i = 0; i < empty; i++) {
+    for (let i = 0; i < empty; i++) {
       stars.push(
         <i key={count} className="fa fa-star-o" />
       );
@@ -278,14 +278,14 @@ class RatingStars extends React.Component {
     }
     return (
       <div className="rating-stars">
-        {stars.map( (el) => el )}
+        {stars}
       </div>
     );
   }
 
 }
 
-module.exports = RatingStars;
+export default RatingStars;
 ```
 
 - Should be straight forward here. We're creating a bunch of star icons (courtesy of Font Awesome,) sticking it in an array, and then rendering the array.
@@ -297,7 +297,7 @@ module.exports = RatingStars;
 
 ```javascript
 // start with other require statements
-var RatingStars = require('./RatingStars');
+import RatingStars from './RatingStars';
 // end with other require statements
 
 // start replace STAR in render
@@ -318,9 +318,9 @@ var RatingStars = require('./RatingStars');
 ### jsx/Header.jsx
 
 ```javascript
-var React = require('react');
+import React from 'react';
 
-class Header extends React.Component {
+class Header extends Component {
   render() {
     return (
       <header className="app-header">
@@ -336,7 +336,7 @@ class Header extends React.Component {
   }
 }
 
-module.exports = Header;
+export Default Header;
 ```
 
 - Here we're giving the value of this.props to the select. This way you know it will always reflect what it's given via props. *Note:* this is not two-way data binding. You must explicitly handle the events. We'll see what that means here in a sec.
@@ -345,7 +345,7 @@ module.exports = Header;
 
 ```javascript
 // start with other requires
-var Header = require('./Header');
+import Header from './Header';
 // end with other requires
 
 // start in render function, in .app-container, before .movies-list
@@ -410,13 +410,13 @@ changeLayout(layout) {
 ### jsx/MovieListLayout.jsx
 
 ```javascript
-var React = require('react');
-var RatingStars = require('./RatingStars');
+import React from 'react';
+import RatingStars from './RatingStars';
 
-class MovieListLayout extends React.Component {
+class MovieListLayout extends Component {
 
   render() {
-    var img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
+    const img = (this.props.Poster && this.props.Poster !== 'N/A') ? this.props.Poster : 'statics/img/placeholder.png';
     return (
       <div className="movie-row">
         <div className="movie-row__img-container">
@@ -439,7 +439,7 @@ class MovieListLayout extends React.Component {
 
 }
 
-module.exports = MovieListLayout;
+export default MovieListLayout;
 ```
 
 - Nothing here should look unfamiliar. We're using the `Plot` too in this layout for a little more detail, but otherwise it's just structural and class name changes from the Tile layout. Presenting the same info differently.
@@ -448,11 +448,11 @@ module.exports = MovieListLayout;
 
 ```javascript
 // start with other requires
-var MovieListLayout = require('./MovieListLayout');
+import MovieListLayout from './MovieListLayout';
 // end with other requires
 
 // start in render before return
-var layout;
+let layout;
 if (this.state.layout === 'tile') {
   layout = MovieTileLayout;
 }
@@ -517,8 +517,8 @@ handleTermEvent(e) {
 
 ```javascript
 // start with other requires
-var omdb = require('omdb-client');
-// var omdb = require('./fake-omdb-client');
+import omdb from 'omdb-client';
+// import omdb from './fake-omdb-client';
 // end with other requires
 
 // start initial state declaration in constructor – replace
@@ -582,7 +582,7 @@ handleClearEvent(e) {
 // end Header method
 
 // start in render before return
-var searchBox;
+let searchBox;
 if (this.props.term) {
   searchBox = (
     <h3 className="app-header__term">
@@ -636,34 +636,37 @@ Now we're going to get in to using iojs (or node) to do some server-side pre-ren
 ### app.js (not in jsx/)
 
 ```javascript
-require("babel-core/register");
+import koa from 'koa';
+import route from 'koa-route';
+import serve from 'koa-static';
+import mount from 'koa-mount';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import _ from 'lodash';
+import fs from 'fs';
+import ClientApp from './jsx/index.jsx';
 
-var koa = require('koa');
-var route = require('koa-route');
-var serve = require('koa-static');
-var mount = require('koa-mount');
-var React = require('react');
-var ReactDOMServer = require('react-dom/server');
-var _ = require('lodash');
-var fs = require('fs');
+const baseTemplate = fs.readFileSync('./baseTemplate.html');
+const templateFn = _.template(baseTemplate);
+const PORT = 3000;
 
-var baseTemplate = fs.readFileSync('./baseTemplate.html');
-var ClientApp = require('./jsx/index.jsx');
-
-var app = koa();
+const app = koa();
 
 app.use(mount('/fa', serve('../node_modules/font-awesome')));
 app.use(mount('/public', serve('./public')));
+app.use(mount('/statics', serve('../statics')));
 
 app.use(route.get('/', function *() {
-  var rendered = ReactDOMServer.renderToString(React.createElement(ClientApp));
-  this.body = _.template(baseTemplate)({body:rendered});
+  const rendered = ReactDOMServer.renderToString(React.createElement(ClientApp));
+  this.body = templateFn({body:rendered});
 }));
 
-app.listen(3000);
+console.log('listening on port', PORT)
+app.listen(PORT);
 
 ```
 
+- Run using babel-node.
 - Kinda going all-in at once, since it doesn't really work without all the parts and this isn't a server-side JS workshop so I'm not going to explain the ins and outs of it.
 - The `require('babel/register')` at the top is so we can require JSX and ES6 type files in node without blowing up the server. It makes babel run on every incoming required file.
 - We're using koa but this code would nearly work as is with Express. For those who don't know koa, it's written by the same guy who did Express, TJ Holowaychuck, and functions very similarly, only it uses ES6 generators instead of callbacks for its middleware. It's super cool and really simple to use.

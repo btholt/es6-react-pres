@@ -1,9 +1,9 @@
-var search = require('./netflix');
-var get = require('./movies');
-var _ = require('lodash');
+import search from './netflix';
+import get from './movies';
+import _ from 'lodash';
 
 
-var omdb = {
+const omdb = {
   search: (params, cb) => {
     cb(null, {Search:_.shuffle(search.Search)});
   },
@@ -12,4 +12,4 @@ var omdb = {
   }
 };
 
-module.exports = omdb;
+export default omdb;

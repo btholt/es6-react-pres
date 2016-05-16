@@ -1,4 +1,4 @@
-var React = require('react');
+import React from 'react';
 
 class Header extends React.Component {
 
@@ -31,7 +31,7 @@ class Header extends React.Component {
 
   render() {
 
-    var searchBox;
+    let searchBox;
     if (this.props.term) {
       searchBox = (
         <h3 className="app-header__term">
@@ -63,4 +63,4 @@ class Header extends React.Component {
 
 }
 
-module.exports = Header;
+export default Header;
