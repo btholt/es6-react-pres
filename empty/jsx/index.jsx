@@ -15,7 +15,11 @@ class App extends Component {
       <div className='app-container'>
         <div className='movies-list'>
           <pre>
-            <code>{JSON.stringify(this.state.results,null,4)}</code>
+            <code>{this.state.results.map((el) => {
+              return (
+                <h1>{el.Title}</h1>
+              );
+            })}</code>
           </pre>
         </div>
       </div>
