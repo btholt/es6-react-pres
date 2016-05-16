@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { clone } from 'lodash';
 import { Search } from './netflix';
+import MovieContainer from './MovieContainer';
+import MovieTileLayout from './MovieTileLayout';
 
 class App extends Component {
   constructor (props) {
@@ -14,13 +16,15 @@ class App extends Component {
     return (
       <div className='app-container'>
         <div className='movies-list'>
-          <pre>
-            <code>{this.state.results.map((el) => {
-              return (
-                <h1>{el.Title}</h1>
-              );
-            })}</code>
-          </pre>
+          {this.state.results.map((el) => {
+            return (
+              <MovieContainer
+                id={el.imdbID}
+                key={el.imdbID}
+                layout={MovieTileLayout}
+              />
+            );
+          })}
         </div>
       </div>
     );
