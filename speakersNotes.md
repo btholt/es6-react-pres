@@ -65,7 +65,7 @@ About as basic as you can get with React here. We're just creating a basic compo
 ### jsx/clientApp.jsx
 
 ```javascript
-import {render} from react-dom';
+import {render} from 'react-dom';
 import React from 'react';
 import App from './index';
 render(<App />, window.document.querySelector("#target"));
